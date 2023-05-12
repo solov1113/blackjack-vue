@@ -17,27 +17,8 @@ export default {
       <div class="hero-content !w-full text-center text-neutral-content">
         <div class="m-2">
           <h1 class="mb-5 text-5xl font-bold">
-            Welcome to <span class="text-primary">OSC!</span>
+            Welcome to <span class="text-primary">Blackjack!</span>
           </h1>
-          <p>
-            This "casino" is made for fun only! It is just a game and no real
-            money is involved. What is the purpose of this? To enjoy games from
-            a casino while playing for fake points. Goal of this project is to
-            make these games as satisfying as possible and let people have fun
-            without losing money.
-          </p>
-          <p class="mt-3">
-            Creator:
-            <a class="text-accent" href="https://github.com/LucasHazardous"
-              >LucasHazardous</a
-            >
-          </p>
-          <p>
-            Design:
-            <a class="text-accent" href="https://github.com/matt-pasek"
-              >matt-pasek</a
-            >
-          </p>
         </div>
       </div>
     </div>

@@ -88,7 +88,7 @@ export default {
     class="flex min-h-screen w-screen justify-center items-center transition-all"
   >
     <ToastNotification
-      :message="'You earned ' + lastReward + ' points!'"
+      :message="'You are winner'"
       class="transition-all"
       :class="end ? 'translate-x-0' : 'translate-x-96'"
     />

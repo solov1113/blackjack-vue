@@ -1,5 +1,5 @@
 <script>
-import BetSelectButton from "../components/BetSelectButton.vue";
+// import BetSelectButton from "../components/BetSelectButton.vue";
 import BlackjackCardTable from "../components/BlackjackCardTable.vue";
 import ToastNotification from "../components/ToastNotification.vue";
 
@@ -7,7 +7,7 @@ export default {
   props: ["points"],
   data() {
     return {
-      playing: false,
+      playing: true,
       selectedBet: 25000,
       lastReward: 0,
       blackjackBets: [25000, 50000],
@@ -71,7 +71,7 @@ export default {
       dealerHide: true,
       playerHandValue: 0,
       cardsInPlay: [],
-      enableButtons: false,
+      enableButtons: true,
       dealerHandValue: -1,
       continueButtonEnabled: false,
       action: false,
@@ -80,12 +80,17 @@ export default {
   },
   components: {
     ToastNotification,
-    BetSelectButton,
+    // BetSelectButton,
     BlackjackCardTable,
   },
+
+  mounted() {
+    this.startGame();
+  },
+
   methods: {
     startGame() {
-      this.selectedBet = Number(this.$refs.betSelect.$data.value);
+      this.selectedBet = 100;
       if (this.points - this.selectedBet < 0) return;
       this.enableButtons = true;
 
@@ -129,6 +134,7 @@ export default {
         if (!this.shuffle) this.action = false;
       }, 1000);
     },
+
     startNewRound() {
       if (this.points - this.selectedBet < 0) return;
 
@@ -213,7 +219,7 @@ export default {
   >
     <ToastNotification
       :shuffle="shuffle"
-      :message="'You earned ' + lastReward + ' points!'"
+      :message="'You are winner!'"
       class="transition-all"
       :class="action ? 'translate-x-0' : 'translate-x-96'"
     />
@@ -223,12 +229,8 @@ export default {
       <div
         class="flex flex-row flex-wrap sm:flex-col sm:w-1/3 justify-center items-center gap-5"
       >
-        <div class="flex flex-col items-center">
-          <h2 class="text-[2em]">Blackjack</h2>
-          <p id="lastReward" class="font-mono">Last reward: {{ lastReward }}</p>
-        </div>
         <div class="flex flex-col sm:flex-row gap-5 transition-all">
-          <BetSelectButton
+          <!-- <BetSelectButton
             :class="playing ? 'select-disabled' : 'select-active'"
             :bets="blackjackBets"
             id="betSelect"
@@ -242,7 +244,7 @@ export default {
             :disabled="playing"
           >
             Play
-          </button>
+          </button> -->
         </div>
         <div class="flex flex-col sm:flex-row gap-5 transition-all">
           <div v-if="enableButtons" class="btn-group btn-group-horizontal">
@@ -277,41 +279,6 @@ export default {
           :cards="playerCards"
         ></BlackjackCardTable>
         <h1>{{ playerHandValue }}</h1>
-      </div>
-    </div>
-    <div tabindex="0" class="collapse rounded-box">
-      <div class="collapse-title text-2xl font-medium text-center p-5">
-        Gain per event
-      </div>
-      <div class="collapse-content">
-        <div class="overflow-x-auto">
-          <table class="table w-full">
-            <thead>
-              <tr>
-                <th>Event</th>
-                <th>Reward</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Round start</td>
-                <td>-Original bet</td>
-              </tr>
-              <tr>
-                <td>Tie</td>
-                <td>+Original bet</td>
-              </tr>
-              <tr>
-                <td>Failure</td>
-                <td>Nothing</td>
-              </tr>
-              <tr>
-                <td>Victory</td>
-                <td>+Original bet x 2</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
   </main>
